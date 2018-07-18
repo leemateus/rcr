@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Especialidade;
 use App\Instituicao;
+use App\Referencia;
+use App\User;
 
 class Profissional extends Model
 {
@@ -21,6 +23,14 @@ class Profissional extends Model
 
     public function instituicao(){
       return $this->belongsTo(Instituicao::class, 'instituicao_id','id');
+    }
+
+    public function referencias(){
+      return $this->hasMany(Referencia::class, 'numConselho_id','numConselho');
+    }
+
+    public function user(){
+      return $this->hasOne(User::class, 'numConselho_id');
     }
 
 }

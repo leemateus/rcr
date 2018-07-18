@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Especialidade;
 use App\Instituicao;
+use App\Paciente;
+use App\Profissional;
+use App\ContraRreferencia;
 
 class Referencia extends Model
 {
@@ -18,5 +21,17 @@ class Referencia extends Model
 
     public function instituicao(){
       return $this->hasOne(Instituicao::class, 'instituicao_id','id');
+    }
+
+    public function paciente(){
+      return $this->belongsTo(Paciente::class, 'numSus_id','id');
+    }
+
+    public function profissional(){
+      return $this->belongsTo(Profissional::class, 'numConselho_id','numConselho');
+    }
+
+    public function contraRreferencia(){
+      return $this->hasOne(ContraRreferencia::class, 'referencia_id','id');
     }
 }
