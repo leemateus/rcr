@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ContraRreferencia;
 use Illuminate\Http\Request;
+use App\Referencia;
 
 class ContraRreferenciaController extends Controller
 {
@@ -14,7 +15,9 @@ class ContraRreferenciaController extends Controller
      */
     public function index()
     {
-        //
+      $test=Referencia::all();
+
+      return $test;
     }
 
     /**

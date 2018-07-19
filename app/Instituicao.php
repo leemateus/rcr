@@ -17,6 +17,6 @@ class Instituicao extends Model
     }
 
     public function referencias(){
-      retunr $this->hasMany(Referencia::class, 'instituicao_id');
+      return $this->hasMany(Referencia::class, 'instituicao_id');
     }
 }

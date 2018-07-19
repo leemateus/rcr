@@ -22,6 +22,6 @@ class Paciente extends Model
     }
 
     public function referencias(){
-      retunr $this->hasMany(Referencia::class, 'numSus_id','numSus');
+      return $this->hasMany(Referencia::class, 'numSus_id','numSus');
     }
 }
