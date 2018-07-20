@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Profissional;
 use Illuminate\Http\Request;
+use App\User;
 
 class ProfissionalController extends Controller
 {
@@ -17,15 +18,6 @@ class ProfissionalController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,9 +25,31 @@ class ProfissionalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//inserir no banco
     {
-        //
+      // DB::beginTransaction();
+        $profissional = Profissional::create([
+          'numConselho' => $request->numConselho,
+          'nome' => $request->nome,
+          'especialidade_id' => $request->especialidade_id,
+          'instituicao_id' => $request->instituicao_id,
+        ]);
+
+        $user = User::create([
+          'email' => $request->email,
+          'password' => $request->password,
+          'numConselho_id' => $request->numConselho,
+        ]);
+
+        if(!$profissional || !$user){
+          // DB::rollbackTransaction();
+        }
+        else{
+          // DB::commitTransaction();
+
+          return $profissional;
+        }
+
     }
 
     /**
@@ -49,16 +63,6 @@ class ProfissionalController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Profissional  $profissional
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Profissional $profissional)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -81,5 +85,10 @@ class ProfissionalController extends Controller
     public function destroy(Profissional $profissional)
     {
         //
+    }
+
+    public function shows(Profissional $profissional)
+    {
+      
     }
 }

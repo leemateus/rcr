@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+         'email', 'password','numConselho_id'
     ];
 
     /**
@@ -28,7 +28,6 @@ class User extends Authenticatable
         'password', 'remember_token','created_at','updated_at','deleted_at'
     ];
 
-    protected $fillable=['email','password','numConselho_id'];
 
 
     public function profissional(){

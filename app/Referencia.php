@@ -11,20 +11,20 @@ use App\ContraRreferencia;
 
 class Referencia extends Model
 {
-    protected $hidden=['created_at','updated_at','deleted_at'];
+    protected $hidden=['updated_at','deleted_at'];
 
-    protected $fillable=['descricaoCaso','especialidade_id','instituicao_id','numSus_id'];
+    protected $fillable=['descricaoCaso','especialidade_id','instituicao_id','numSus_id','numConselho_id'];
 
     public function especialidade(){
-      return $this->hasOne(Especialdiade::class, 'especialidade_id','id');
+      return $this->belongsTo(Especialidade::class, 'especialidade_id','id');
     }
 
     public function instituicao(){
-      return $this->hasOne(Instituicao::class, 'instituicao_id','id');
+      return $this->belongsTo(Instituicao::class, 'instituicao_id','id');
     }
 
     public function paciente(){
-      return $this->belongsTo(Paciente::class, 'numSus_id','id');
+      return $this->belongsTo(Paciente::class, 'numSus_id','numSus');
     }
 
     public function profissional(){

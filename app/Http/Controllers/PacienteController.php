@@ -14,7 +14,8 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+        $pacientes = Paciente::all();
+        return response()->json($pacientes);
     }
 
     /**
@@ -44,9 +45,10 @@ class PacienteController extends Controller
      * @param  \App\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $paciente)
+    public function shows($numSus)
     {
-        //
+        $pacientes = Paciente::where('numSus','like',"%$numSus%")->get();
+        return Response()->json($pacientes,200);
     }
 
     /**

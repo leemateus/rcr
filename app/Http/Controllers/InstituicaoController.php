@@ -14,7 +14,9 @@ class InstituicaoController extends Controller
      */
     public function index()
     {
-        //
+        $instuicao=Instituicao::all();
+        return response()->json($instuicao);
+
     }
 
     /**

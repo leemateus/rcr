@@ -38,7 +38,13 @@ class ContraRreferenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contrarreferencia = ContraRreferencia::create([
+          'referencia_id' => $request->referencia_id,
+          'condutaAdotada' => $request->condutaAdotada,
+          'diagnostico' => $request->diagnostico,
+        ]);
+
+        return response()->json($contrarreferencia);
     }
 
     /**
@@ -47,9 +53,13 @@ class ContraRreferenciaController extends Controller
      * @param  \App\ContraRreferencia  $contraRreferencia
      * @return \Illuminate\Http\Response
      */
-    public function show(ContraRreferencia $contraRreferencia)
+    public function show(Request $request)
     {
-        //
+        $contrarreferencia = ContraRreferencia::where('contra_rreferencias.referencia_id','=',"$request->referencia_id")
+        ->select('referencia_id','condutaAdotada','diagnostico','created_at')
+        ->get();
+
+        return response()->json($contrarreferencia);
     }
 
     /**

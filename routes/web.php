@@ -15,4 +15,5 @@
 //     return view('welcome');
 // });
 
-Route::get('/','ContraRreferenciaController@index');
+Route::get('/','ReferenciaController@index');
+Route::get('/{referencia}','ReferenciaController@show');
