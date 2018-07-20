@@ -31,7 +31,7 @@ Route::get('referencia/comcontrarreferencia/{numConselho_id}','ReferenciaControl
 Route::get('instituicao','InstituicaoController@index');
 //seleciona todas as especialidades
 Route::get('especialidade','EspecialidadeController@index');
-//seleciona referencias sem contrarreferencia para uma determinada especialidade
+//seleciona referencias sem contrarreferencia para uma determinada especialidade e instituicao
 Route::get('referencia/semcontrarreferencia/{numConselho_id}','ReferenciaController@showS');
 //seleciona uma contrarreferencia de uma determinada referencia
 Route::get('contrarreferencia/{referencia_id}','ContraRreferenciaController@show');

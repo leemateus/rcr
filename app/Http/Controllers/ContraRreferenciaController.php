@@ -44,7 +44,32 @@ class ContraRreferenciaController extends Controller
           'diagnostico' => $request->diagnostico,
         ]);
 
-        return response()->json($contrarreferencia);
+        $referencia = Referencia::where('referencias.id','=',"$request->referencia_id")
+        ->select('id','descricaoCaso','especialidade_id','instituicao_id','numSus_id','numConselho_id')
+        ->get();
+        foreach ($referencia as $Referencia){
+          $descricaoCaso=$Referencia->descricaoCaso;
+          $especialidade_id=$Referencia->especialidade_id;
+          $instituicao_id=$Referencia->instituicao_id;
+          $numSus_id=$Referencia->numSus_id;
+          $numConselho_id=$Referencia->numConselho_id;
+          $id=$Referencia->id;
+        }
+
+        Referencia::where('referencias.id','=',"$request->referencia_id")
+        ->update([
+          'id' => $id,
+          'descricaoCaso' => $descricaoCaso,
+          'especialidade_id' => $especialidade_id,
+          'instituicao_id' => $instituicao_id,
+          'numSus_id' => $numSus_id,
+          'numConselho_id' => $numConselho_id,
+          'status' => 1,
+        ]);
+
+
+
+        return "ok";
     }
 
     /**

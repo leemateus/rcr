@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Referencia;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReferenciaResource;
+use App\Especialidade;
+use App\Instituicao;
 
 class ReferenciaController extends Controller
 {
@@ -62,22 +64,29 @@ class ReferenciaController extends Controller
 
     public function showS(Request $request)
     {
-      // $referencias = Referencia::with('paciente','instituicao','especialidade','contraRreferencia')
-      // ->whereNotIn('id','referncia_id')->select(
-      //   'id',
-      //   'descricaoCaso',
-      //   'create_at',
-      //   'numSus_id',
-      //   'instituicao_id',
-      //   'especialidade_id'
-      //
-      // )->get();
-      $referencias = Referencia::join('contra_rreferencias','referencias.id','=','contra_rreferencias.referencia_id')
-      ->join('profissionals','profissionals.numConselho','=','referencias.numConselho_id')
-      ->where(['referencias.numConselho_id','!=',"$request->numConselho_id"],
-                ['profissionals.especialidade_id','=','referencias.especialidade_id'],
-                ['profissionals.instituicao_id','=','referencias.instituicao_id'])
-      ->wehereNotIn('referencias.id',[contra_rreferencias.referencia_id])
+
+      $instituicao = Instituicao::join('profissionals','profissionals.instituicao_id','=','instituicaos.id')
+      ->where('profissionals.numConselho','=',"$request->numConselho_id")
+      ->select('profissionals.instituicao_id')
+      ->get();
+      foreach ($instituicao as $Instituicao){
+        $instituicao=$Instituicao->instituicao_id;
+      }
+
+
+      $especialidade = Especialidade::join('profissionals','profissionals.especialidade_id','=','especialidades.id')
+      ->where('profissionals.numConselho','=',"$request->numConselho_id")
+      ->select('profissionals.especialidade_id')
+      ->get();
+      foreach ($especialidade as $Especialidade){
+        $especialidade=$Especialidade->especialidade_id;
+      }
+
+      $referencias = Referencia::join('profissionals','profissionals.numConselho','=','referencias.numConselho_id')
+      ->where('referencias.numConselho_id','!=',"$request->numConselho_id")
+      ->where('referencias.especialidade_id','=',"$especialidade")
+      ->where('referencias.instituicao_id','=',"$instituicao")
+      ->where('referencias.status','=',0)
       ->select('referencias.id','descricaoCaso','referencias.created_at')
       ->get();
 
@@ -87,7 +96,6 @@ class ReferenciaController extends Controller
 
 
     }
-    //seleciona referencia sem contrarreferencia
     public function showC(Request $request){
 
       $referencias = Referencia::join('contra_rreferencias','id','=','contra_rreferencias.referencia_id')
@@ -95,6 +103,10 @@ class ReferenciaController extends Controller
       ->where('referencias.numConselho_id','=',"$request->numConselho_id")
       ->select('id','descricaoCaso','referencias.created_at')
       ->get();
+
+      // $referencias = Referencia::join('profissionals','profissionals.numConselho','=','referencias.numConselho_id')
+      // ->where('referencias.status','=','1')
+      // ->get();
 
       return response()->json($referencias);
 

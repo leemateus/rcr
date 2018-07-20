@@ -12,9 +12,9 @@ class ProfissionalTableSeeder extends Seeder
      */
     public function run()
     {
-        Profissional::create(['numConselho' => '1',
-                              'nome' => 'test',
-                              'especialidade_id' => '1',
-                              'instituicao_id' => '1']);
+        Profissional::create(['numConselho' => '2',
+                              'nome' => 'test2',
+                              'especialidade_id' => '2',
+                              'instituicao_id' => '2']);
     }
 }

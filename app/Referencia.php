@@ -11,7 +11,7 @@ use App\ContraRreferencia;
 
 class Referencia extends Model
 {
-    protected $hidden=['updated_at','deleted_at'];
+    protected $hidden=['updated_at','deleted_at','status'];
 
     protected $fillable=['descricaoCaso','especialidade_id','instituicao_id','numSus_id','numConselho_id'];
 
