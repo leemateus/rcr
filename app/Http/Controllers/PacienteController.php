@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Paciente;
 use Illuminate\Http\Request;
+use App\Contato;
+use App\Endereco;
 
 class PacienteController extends Controller
 {
@@ -36,7 +38,33 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $paciente = Paciente::create([
+        'numSus' => $request->numSus,
+        'nome' => $request->nome,
+        'nomeMae' => $request->nomeMae,
+      ]);
+
+      $endereco = Endereco::create([
+        'logradouro' => $request->logradouro,
+        'bairro' => $request->bairro,
+        'numero' => $request->numero,
+        'cidade' => $reques->cidade,
+        'complemento' => $request->complemento,
+        'numSUs_id' => $request->numSUs,
+      ]);
+
+      $contato = Contato::create([
+        'celular' => $request->celular,
+        'fixo' => $request->fixo,
+        'numSus_id' => $request->numSus,
+      ]);
+
+      if(!$pacienet || !$endereco || !$contato){
+        return response()->json('erro');
+      }
+      else{
+        return response()->json('ok');
+      }
     }
 
     /**

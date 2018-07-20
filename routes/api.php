@@ -17,10 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//seleciona paciente para referencia por id com o like
+//seleciona paciente para referencia por numero do sus com o like
 Route::get('paciente/{numSus}','PacienteController@shows');
 //seleciona todos os pacientes
 Route::get('paciente','PacienteController@index');
+//inserir paciente
+Route::post('paciente','PacienteController@store');
 //inserir referencia do paciente ja selecionado, instituicao e especialidade
 Route::post('referencia','ReferenciaController@store');
 //inserir contrarreferenica com o codigo da referencia ja selecionado
