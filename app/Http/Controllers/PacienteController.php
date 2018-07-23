@@ -75,7 +75,8 @@ class PacienteController extends Controller
      */
     public function shows($numSus)
     {
-        $pacientes = Paciente::where('numSus','like',"%$numSus%")->get();
+        $pacientes = Paciente::where('numSus','like',"%$numSus%")
+        ->get();
         return Response()->json($pacientes,200);
     }
 
@@ -88,6 +89,30 @@ class PacienteController extends Controller
     public function edit(Paciente $paciente)
     {
         //
+    }
+
+    public function show($numSus){
+        $paciente = Paciente::where('pacientes.numSus','=',"$numSus")
+        // ->where('contatos.numSUs_id','=',"$numSus")
+        // ->where('enderecos.numSUs_id','=',"$numSus")
+        // ->join('contatos','pacientes.numSus','=','contatos.numSUs_id')
+        // ->join('enderecos','pacientes.numSus','=','enderecos.numSUs_id')
+        ->select('pacientes.numSus','pacientes.nome','pacientes.nomeMae')
+        ->get();
+
+        $endereco = Endereco::where('enderecos.numSUs_id','=',"$numSus")
+        ->select('enderecos.logradouro','enderecos.bairro','enderecos.numero','enderecos.cidade','enderecos.complemento')
+        ->get();
+
+        $contato = Contato::where('contatos.numSUs_id','=',"$numSus")
+        ->select('contatos.fixo','contatos.celular')
+        // 'enderecos.logradouro','enderecos.bairro','enderecos.numero','enderecos.cidade','enderecos.complemento',
+        // 'contatos.fixo','contatos.celular')
+        ->get();
+
+        $dados = [$paciente,$endereco,$contato];
+
+        return response()->json($dados);
     }
 
     /**
