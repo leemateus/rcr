@@ -37,7 +37,7 @@ class ProfissionalController extends Controller
 
         $user = User::create([
           'email' => $request->email,
-          'password' => $request->password,
+          'password' => bcrypt($request->password),
           'numConselho_id' => $request->numConselho,
         ]);
 
@@ -89,6 +89,6 @@ class ProfissionalController extends Controller
 
     public function shows(Profissional $profissional)
     {
-      
+
     }
 }
