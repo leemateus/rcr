@@ -17,6 +17,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
+Route::post('auth/login','ApiAuthController@login');
+//
+// Route::group(['middleware'=>'jwt.auth','namespace'=>'Api\\'],function(){
+//   Route::get('auth/me','AuthController@me');
+//   Route::post('auth/refresh','AuthController@refresh');
+// });
+
+//inserir um profissional
+Route::post('profissional','ProfissionalController@store');
 //seleciona paciente para referencia por numero do sus com o like
 Route::get('pacientes/{numSus}','PacienteController@shows');
 //seleciona todos os pacientes
