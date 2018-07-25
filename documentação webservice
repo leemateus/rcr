@@ -1,0 +1,100 @@
+
+127.0.0.1:8000/api/profissional - post
+
+inserir um profissional
+
+{
+	"numConselho":"12",
+	"nome":"saraiva",
+	"especialidade_id":1,
+	"instituicao_id":2,
+	"email":"saraiva@gmail.com",
+	"password":"1234"
+}
+
+127.0.0.1:8000/api/auth/login - post
+
+solicita token
+
+{
+	"email":"saraiva@gmail.com",
+	"password":"1234"
+}
+
+127.0.0.1:8000/api/paciente - get
+
+solicita todos os pacientes
+
+127.0.0.1:8000/api/pacientes/{numSus} - get
+
+lolicita apenas um paciente
+
+[
+    {
+        "numSus": "1",
+        "nome": "paciente1",
+        "nomeMae": "mae1"
+    }
+]
+
+127.0.0.1:8000/api/paciente - post
+
+insere um paciente
+
+{
+	"numSus": "003",
+	"nome": "chico",
+	"nomeMae": "raimunda",
+	"logradouro": "rua 10",
+	"bairro": "catumbi",
+	"cidade": "floriano",
+	"numero": "12",
+	"complemento": "A",
+	"celular": "89999172620",
+	"fixo": "8935223030"
+	
+}
+
+127.0.0.1:8000/api/referencia - post
+
+insere uma referencia(tem q estar selecionado a instituicao, especialidade, profissionalque fez a referencia e o paciente
+
+{
+	"descricaoCaso":"paciente muito debilitado -acidente de transito",
+	"especialidade_id":1,
+	"instituicao_id":2,
+	"numSus_id":"003",
+	"numConselho_id":2
+}
+
+127.0.0.1:8000/api/contrarreferencia - post
+
+insere uma contrarreferencia com o id da referencia ja selecionado
+
+{
+	"condutaAdotada":"medicamentos para curar feridas",
+	"diagnostico":"ferimentos graves por causa de acidente",
+	"referencia_id":6
+}
+
+127.0.0.1:8000/api/referencia/comcontrarreferencia/{numConselho_id} - get
+
+solicita uma contrarreferencia disponível para um profissional logado - pelo numConselho
+
+127.0.0.1:8000/api/instituicao -get
+
+solicita todas as instituições
+
+127.0.0.1:8000/api/especialidade - get
+
+solicita todas as especialidades
+
+127.0.0.1:8000/api/eferencia/semcontrarreferencia/{numConselho_id} - get
+
+solicita referencias sem contrarreferencia para uma determinada especialidade e instituicao a partir de um profissional
+
+127.0.0.1:8000/api/contrarreferencia/{referencia_id} - get 
+
+solicita uma contrarreferencia de uma determinada referencia
+
+
