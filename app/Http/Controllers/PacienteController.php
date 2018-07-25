@@ -48,9 +48,9 @@ class PacienteController extends Controller
         'logradouro' => $request->logradouro,
         'bairro' => $request->bairro,
         'numero' => $request->numero,
-        'cidade' => $reques->cidade,
+        'cidade' => $request->cidade,
         'complemento' => $request->complemento,
-        'numSUs_id' => $request->numSUs,
+        'numSus_id' => $request->numSus,
       ]);
 
       $contato = Contato::create([
@@ -59,12 +59,14 @@ class PacienteController extends Controller
         'numSus_id' => $request->numSus,
       ]);
 
-      if(!$pacienet || !$endereco || !$contato){
-        return response()->json('erro');
-      }
-      else{
-        return response()->json('ok');
-      }
+      // if(!$pacienet || !$endereco || !$contato){
+      //   return response()->json('erro');
+      // }
+      // else{
+      //   return response()->json('ok');
+      // }
+      return response()->json('ok');
+
     }
 
     /**
@@ -110,9 +112,9 @@ class PacienteController extends Controller
         // 'contatos.fixo','contatos.celular')
         ->get();
 
-        $dados = [$paciente,$endereco,$contato];
+        // $dados = [$paciente,$endereco,$contato];
 
-        return response()->json($dados);
+        return response()->json($paciente);
     }
 
     /**

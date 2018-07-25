@@ -47,7 +47,7 @@ class ProfissionalController extends Controller
         else{
           // DB::commitTransaction();
 
-          return $profissional;
+          return response()->json($profissional);
         }
 
     }

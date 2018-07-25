@@ -9,7 +9,7 @@ class Endereco extends Model
 {
   protected $hidden=['created_at','updated_at','deleted_at'];
 
-  protected $fillable=['logradouro','bairro','numero','cidade','complemento'];
+  protected $fillable=['logradouro','bairro','numero','cidade','complemento','numSus_id'];
 
   public function paciente(){
     return $this->hasOne(Paciente::class, 'numSUs_id','numSus');

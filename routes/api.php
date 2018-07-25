@@ -24,8 +24,7 @@ Route::post('auth/login','ApiAuthController@login');
 // Route::group(['middleware'=>'jwt.auth','namespace'=>'Api\\'],function(){
 
 Route::group(['middleware'=>'jwt.auth'],function(){
-//seleciona todos os pacientes
-Route::get('paciente','PacienteController@index');
+
 
 Route::get('auth/me','ApiAuthController@me');
 Route::post('auth/refresh','ApiAuthController@refresh');
@@ -35,8 +34,8 @@ Route::post('auth/refresh','ApiAuthController@refresh');
 Route::post('profissional','ProfissionalController@store');
 //seleciona paciente para referencia por numero do sus com o like
 Route::get('pacientes/{numSus}','PacienteController@shows');
-// //seleciona todos os pacientes
-// Route::get('paciente','PacienteController@index');
+//seleciona todos os pacientes
+Route::get('paciente','PacienteController@index');
 //seleciona um paciente específico
 Route::get('paciente/{numSus}','PacienteController@show');
 //inserir paciente

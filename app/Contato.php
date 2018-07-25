@@ -12,7 +12,7 @@ class Contato extends Model
 
   protected $hidden=['created_at','updated_at','deleted_at'];
 
-  protected $fillable=['celular','fixo','numSus'];
+  protected $fillable=['celular','fixo','numSus_id'];
 
   public function paciente(){
     return $this->hasOne(Paciente::class, 'numSus_id','numSus');
