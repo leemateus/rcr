@@ -54,3 +54,5 @@ Route::get('especialidade','EspecialidadeController@index');
 Route::get('referencia/semcontrarreferencia/{numConselho_id}','ReferenciaController@showS');
 //seleciona uma contrarreferencia de uma determinada referencia
 Route::get('contrarreferencia/{referencia_id}','ContraRreferenciaController@show');
+//seleciona todas as referencias realizadas por um profissional e n tem contrarreferencia
+Route::get('referencia/semcontrarreferencia/me/{numConselho_id}','ReferenciaController@showMe');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Referencia;
 use Illuminate\Http\Request;
-use App\Http\Resources\ReferenciaResource;
 use App\Especialidade;
 use App\Instituicao;
 
@@ -15,10 +14,23 @@ class ReferenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($numConselho)
     {
       $referencias = Referencia::paginate();
       return ReferenciaResource::collection($referencias);
+
+
+
+      return response()->json($referencias);
+    }
+
+    public function showMe($numConselho_id){
+      $referencias = Referencia::select('id','descricaoCaso','created_at')
+      ->where('referencias.numConselho_id','=',"$numConselho_id")
+      ->where('referencias.status','=',0)
+      ->get();
+
+      return response()->json($referencias);
     }
 
     /**
@@ -56,10 +68,7 @@ class ReferenciaController extends Controller
      * @param  \App\Referencia  $referencia
      * @return \Illuminate\Http\Response
      */
-    public function show(Referencia $referencia)
-    {
-      return new ReferenciaResource($referencia);
-    }
+
 
 
     public function showS(Request $request)
@@ -92,10 +101,9 @@ class ReferenciaController extends Controller
 
       return response()->json($referencias);
 
-
-
-
     }
+
+
     public function showC(Request $request){
 
       $referencias = Referencia::join('contra_rreferencias','id','=','contra_rreferencias.referencia_id')
