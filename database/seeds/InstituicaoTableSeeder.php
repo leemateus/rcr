@@ -12,6 +12,6 @@ class InstituicaoTableSeeder extends Seeder
      */
     public function run()
     {
-      Instituicao::create(['nome' => 'CREAS']);
+      Instituicao::create(['nome' => 'FUNASA']);
     }
 }

@@ -12,6 +12,6 @@ class EspecialidadeTableSeeder extends Seeder
      */
     public function run()
     {
-        Especialidade::create(['nome'=>'enfermeiro']);
+        Especialidade::create(['nome'=>'dentista']);
     }
 }

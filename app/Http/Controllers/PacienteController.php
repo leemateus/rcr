@@ -77,7 +77,7 @@ class PacienteController extends Controller
      */
     public function shows($numSus)
     {
-        $pacientes = Paciente::where('numSus','like',"%$numSus%")
+        $pacientes = Paciente::where('numSus','like',"$numSus%")
         ->get();
         return Response()->json($pacientes,200);
     }
@@ -88,9 +88,33 @@ class PacienteController extends Controller
      * @param  \App\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $paciente)
+    public function edit(Request $request)
     {
-        //
+      Paciente::where('pacientes.numSus','=',"$request->numSus")
+      ->update([
+        'numSus' => $request->numSus,
+        'nome' => $request->nome,
+        'nomeMae' => $request->nomeMae,
+      ]);
+
+      Endereco::where('enderecos.numSus_id','=',"$request->numSus")
+      ->update([
+        'logradouro' => $request->logradouro,
+        'bairro' => $request->bairro,
+        'numero' => $request->numero,
+        'cidade' => $request->cidade,
+        'complemento' => $request->complemento,
+        'numSus_id' => $request->numSus,
+      ]);
+
+      Contato::where('contatos.numSUs_id','=',"$request->numSus")
+      ->update([
+        'celular' => $request->celular,
+        'fixo' => $request->fixo,
+        'numSus_id' => $request->numSus,
+      ]);
+
+      return response()->json('ok');
     }
 
     public function show($numSus){
@@ -102,11 +126,11 @@ class PacienteController extends Controller
         ->select('pacientes.numSus','pacientes.nome','pacientes.nomeMae')
         ->get();
 
-        $endereco = Endereco::where('enderecos.numSUs_id','=',"$numSus")
+        $endereco = Endereco::where('enderecos.numSus_id','=',"$numSus")
         ->select('enderecos.logradouro','enderecos.bairro','enderecos.numero','enderecos.cidade','enderecos.complemento')
         ->get();
 
-        $contato = Contato::where('contatos.numSUs_id','=',"$numSus")
+        $contato = Contato::where('contatos.numSus_id','=',"$numSus")
         ->select('contatos.fixo','contatos.celular')
         // 'enderecos.logradouro','enderecos.bairro','enderecos.numero','enderecos.cidade','enderecos.complemento',
         // 'contatos.fixo','contatos.celular')

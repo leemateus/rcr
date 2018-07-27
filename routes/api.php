@@ -36,6 +36,8 @@ Route::post('profissional','ProfissionalController@store');
 Route::get('pacientes/{numSus}','PacienteController@shows');
 //seleciona todos os pacientes
 Route::get('paciente','PacienteController@index');
+//atualiza paciente
+Route::put('paciente','PacienteController@edit');
 //seleciona um paciente específico
 Route::get('paciente/{numSus}','PacienteController@show');
 //inserir paciente
